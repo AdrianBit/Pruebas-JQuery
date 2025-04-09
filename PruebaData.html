@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo completo de data y removedata</title>
+</head>
+
+<body>
+    <ul id="lista">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+
+    <div id="division">
+        En esta división (elemento id="division") voy a guardar datos con la función data y luego los voy a leer
+    </div>
+    <br>
+    <form name="formul">
+        Escribe un valor a guardar, leer o eliminar:
+        <input type="text" name="valor" id="valor">
+        <br>
+        <input type="button" value="guardar dato" id="guardar">
+        <input type="button" value="leer dato" id="leer">
+        <input type="button" value="eliminar dato" id="eliminar">
+    </form>
+
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(function () {
+            let elementosLista = $("li", "#lista");
+            elementosLista.data('numero', 99);
+
+            let contador = 1;
+            elementosLista.each(function () {
+                item = $(this);
+                item.data('numero', item.data('numero') + contador);
+                contador++;
+            });
+
+            elementosLista.each(function () {
+                item = $(this);
+                console.log("dato en el item:", item.data('numero'));
+            });
+
+            $("#guardar").click(function (evento) {
+                var valor = $.trim(document.formul.valor.value);
+                document.formul.valor.value = "";
+                //Esta misma línea de código se puede codificar así también con jQuery
+                //var valor = $("#valor").attr("value");
+                if (valor != undefined && valor != null && valor != "") {
+                    $("#division").data("midato", valor);
+                    $("#division").html('He guardado en este elemento (id="division") un dato llamado "midato" con el valor "' + valor + '"');
+                } else {
+                    $("#division").html('No hay ningun dato para guardar en este elemento (id="division")');
+                }
+            });
+
+            $("#leer").click(function (evento) {
+                if ($("#division").data($.trim("midato")) != undefined && $("#division").data($.trim("midato")) != null) {
+                    valor = $("#division").data("midato");
+                    $("#division").html('En este elemento (id="division") leo un dato llamado "midato" con el valor "' + valor + '"');
+                } else {
+                    $("#division").html('En este elemento (id="division") no hay ningun dato guardado');
+                }
+
+            });
+
+            $("#eliminar").click(function (evento) {
+                if ($("#division").data($.trim("midato")) != undefined && $("#division").data($.trim("midato")) != null) {
+                    $("#division").removeData("midato");
+                    $("#division").html('Acabo de eliminar del elemento (id="division") el dato llamado "midato"');
+                } else {
+                    $("#division").html('No hay ningun dato para eliminar en este elemento (id="division")');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

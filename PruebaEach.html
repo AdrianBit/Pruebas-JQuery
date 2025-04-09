@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recorrido a divisiones para poner colores</title>
+  <style>
+    div {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div>red</div>
+  <div>blue</div>
+  <div>red</div>
+  <div>white</div>
+  <div>red</div>
+  <div>green</div>
+  <div>orange</div>
+  <div>red</div>
+  <div>nada</div>
+  <div>red</div>
+  <div>blue</div>
+
+  <script src="jquery-3.7.1.js"></script>
+  <script>
+    $("div").each(function (i) {
+        elemento = $(this);
+        if (elemento.html() == "white")
+          return true;
+        if (elemento.html() == "nada")
+          return false;
+        elemento.css("color", elemento.html());
+      });
+  </script>
+</body>
+</html>

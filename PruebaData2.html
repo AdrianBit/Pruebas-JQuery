@@ -1,0 +1,75 @@
+<html>
+ <head>
+  <title>Ejemplos de uso de la función data() y removeData() del core de jQuery</title>
+ </head>
+ <body>
+
+  <h1>Ejemplo data() con enlaces</h1>
+
+  <form id="formul">
+    <p>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" value="Miguel">
+    </p>
+    <p>
+      <label for="surname">Apellidos:</label>
+      <input type="text" id="surname" name="surname" value="Alvarez">
+    </p>
+    <p>
+      <label for="sex">Sexo:</label>
+      <select id="sex" name="sex">
+        <option value="h" selected>Hombre</option>
+        <option value="m">Mujer</option>
+      </select>
+    </p>
+  </form>
+  <p>
+    <button id="guardar">Guardar estado</button>
+    <button id="restaurar">Restaurar estado</button>
+    <button id="eliminar">Borrar</button>
+  </p>
+  <div id="mensaje">
+    Mensaje...
+  </div>
+
+  <script src="jquery-3.7.1.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      let formulario = $("#formul");
+      let mensaje = $("#mensaje");
+
+      $("#guardar").click(function (evento) {
+        let dataObject = {
+          name: $('#name', formulario).prop('value'),
+          surname: $('#surname', formulario).prop('value'),
+          sex: $('#sex', formulario).prop('value'),
+        }
+        formulario.data("estado", dataObject);
+        mensaje.html('He guardado el estado actual del formulario: ');
+      });
+
+      $("#restaurar").click(function (evento) {
+        let estado = formulario.data('estado');
+        if(estado) {
+          for(let index in estado) {
+            let valor = estado[index];
+            if(valor) {
+              $('#' + index).prop('value', estado[index]);
+            }
+          }
+          mensaje.html('He restaurado el valor del formulario guardado');
+        } else {
+          mensaje.html('No hay datos almacenados');
+        }
+      });
+
+      $("#eliminar").click(function (evento) {
+        formulario.removeData("estado");
+        mensaje.html('Hemos borrado cualquier dato guardado anteriormente');
+      });
+    });
+  </script>
+
+ </body>
+</html>

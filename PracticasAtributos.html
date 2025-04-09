@@ -1,0 +1,76 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajando con inputs</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" value="loquesea" id="campotexto">
+    </form>
+    <p>
+        <button id="recuperarType">Recuperar el type del input</button>
+    </p>
+    <p>
+        <button id="recuperarValueInicial">Recuperar el value inicial del input</button>
+    </p>
+    <img src="https://placehold.co/300x100/red/white" alt="imagen placeholder" id="imagen">
+
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            let list = ["red", "yellow", "green", "blue", "black", "white", "purple", "orange", "pink"];
+            let inputElement = $("#campotexto");
+            $("#recuperarType").click(function () {
+                console.log(inputElement.attr("type"));
+            });
+            $("#recuperarValueInicial").click(function () {
+                console.log(inputElement.attr("value"));
+                let num1 = Math.floor(Math.random() * list.length);
+                let num2 = Math.floor(Math.random() * list.length);
+                $("#imagen").attr("src", "https://placehold.co/300x100/" + list[num1] + "/" + list[num2]);
+            });
+        });
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>método de attr cuando tenemos varios elementos</title>
+</head>
+<body>
+  <p>
+    <a href="http://www.elpais.com" title="Diario El País">El País</a>
+    <br>
+    <a href="http://www.mozilla.org" title="Fundación Mozilla">Mozilla Fundation</a>
+    <br>
+    <a href="http://es.openoffice.org/" title="Suite de programas de oficina">Open Office</a>
+  </p>
+  <p>
+    <button id="cambiarAtributos">Cambiar atributos</button>
+  </p>
+  <script src="jquery-3.7.1.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#cambiarAtributos").click(function () {
+        $("a").each(function() {
+          let enlace = $(this);
+          enlace.attr('title', 'Title modificado por jQuery');
+          enlace.attr('href', 'https://www.desarrolloweb.com');
+          enlace.css('color', 'orange');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
