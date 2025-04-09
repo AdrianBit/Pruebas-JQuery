@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(function () {
+            let colores = [
+                "red", "blue", "green", "yellow", "purple", "orange", "pink", "brown",
+                "black", "white", "gray", "cyan", "magenta", "lime", "teal", "indigo",
+                "violet", "gold", "silver", "coral", "salmon", "khaki", "plum", "navy",
+                "olive", "maroon", "turquoise", "chocolate", "crimson", "orchid"
+            ];
+            let div = $("#midiv")
+            let boton = $('#boton')
+            let active = false
+            let Repeticion = null
+            $("<label for='midiv'>Esto es un div</label>").insertBefore(div)
+            div.css({
+               "border": "solid",
+               "width": "50px",
+               "height": "50px" 
+            });
+
+
+            function rainbow(array, div, boton) {
+                if (!active) {
+                    if (Repeticion != null) {
+                        clearInterval(Repeticion)
+                    }
+                    
+                    boton.html("Modo <b><i>RAINBOW</i></b>")
+                    active = true
+                    div.mouseover(function (event) {
+                        let num1 = Math.floor(Math.random() * colores.length)
+                        div.css("background", colores[num1])
+                    })
+                } else {
+                    boton.html("Modo Pasar por encima")
+                    active = !active
+                    Repeticion = setInterval(() => {
+                        let rng = Math.floor(Math.random() * array.length)
+                        div.css("background", array[rng])
+                    }, 10);
+                    
+                }
+
+            }
+
+        
+
+            boton.click(()=>rainbow(colores, div, boton))
+
+
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+    <div id="midiv"></div>
+    <br><br>
+    <button id="boton">Modo Pasar por encima</button>
+
+</body>
+
+</html>
